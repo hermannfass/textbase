@@ -84,6 +84,7 @@ func convPwsafeExportLine(l string) (pwrec, error) {
 		pass  := f[2]
 		url   := f[3]
 		mail  := f[10]
+		// Cut off group name (pwSafe folder name) from title:
 		if (strings.Contains(title, ".")) {
 			title = strings.Split(title, ".")[1]
 		}

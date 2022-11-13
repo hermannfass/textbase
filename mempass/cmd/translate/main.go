@@ -64,16 +64,21 @@ func main() {
 
 	var result string
 	if (*inPathFlag == "") {
+		// No file specified => encode just one word
+		var w string
 		if (len(flag.Args()) == 0) {
-			// To do:
-			// If also no command line input: Request it!
-
+			// Word not an argument => ask for it
+			fmt.Print("Word to spell with secrets: ")
+			_, rerr := fmt.Scanln(&w)
+			if (rerr != nil) {
+				log.Fatal(rerr)
+			}				
+		} else {
+			w = flag.Args()[0]
 		}
-
-		// Translate all characters received as command line argument:
-		fmt.Printf("Translating \"%s\".\n", flag.Args()[0])
-		codes := mempass.CodesForWord(flag.Args()[0], secrets)
-		result = strings.Join(codes, "\n")
+		fmt.Printf("The secrets spelling the word \"%s\" are:\n", w)
+		codes := mempass.CodesForWord(w, secrets)
+		result = strings.Join(codes, "\n") + "\n"
 	} else {
 		fmt.Printf("Translating file %s.\n", *inPathFlag)
 		result = mempass.EncodeFile(*inPathFlag, secrets)
@@ -83,7 +88,9 @@ func main() {
 		fmt.Println("Error writing to file:", werr)
 		fmt.Printf("Error type: %T\n", werr)
 	} else {
-		fmt.Printf("%d bytes written to: %s\n", n, outFH.Name())
+		if (*inPathFlag != "") {
+			fmt.Printf("%d bytes written to: %s\n", n, outFH.Name())
+		}
 	}
 	// outFH.Sync()
 

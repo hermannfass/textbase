@@ -1,6 +1,4 @@
 #!/bin/zsh
-# Verschlüsselung mit dem Zauberwort, mit der Lieblingszahl
-# beginnend und weiter mit YY=DD und Optimismus
 openssl enc -d -aes-256-cbc -a \
    -in pwsafe.txt.enc \
    -out pwsafe.txt

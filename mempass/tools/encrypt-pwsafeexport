@@ -1,0 +1,5 @@
+#!/bin/zsh
+openssl enc -aes-256-cbc -a -salt \
+   -in pwsafe.txt \
+   -out pwsafe.txt.enc
+rm pwsafe.txt

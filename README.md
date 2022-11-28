@@ -1,8 +1,6 @@
 # textbase
 Tools and APIs for handling textual data.
 
-Main executables / tools
-
 mempass
 =======
 
